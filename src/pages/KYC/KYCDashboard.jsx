@@ -300,30 +300,49 @@ const KYCDashboard = () => {
                 </div>
 
                 {/* KYC Queue Table */}
-                <div className="overflow-x-auto">
-                    <Table>
-                        <Table.Header>
-                            <Table.Row>
-                                <Table.Head>
+                <div className="overflow-x-auto border rounded-lg bg-white dark:bg-gray-900">
+                    <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700" style={{ minWidth: '1200px' }}>
+                        <thead className="bg-gray-50 dark:bg-gray-800">
+                            <tr>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider min-w-[50px]">
                                     <input type="checkbox" className="rounded border-gray-300 text-primary-600 focus:ring-primary-500" />
-                                </Table.Head>
-                                <Table.Head>User</Table.Head>
-                                <Table.Head>Status</Table.Head>
-                                <Table.Head>Priority</Table.Head>
-                                <Table.Head>Risk Score</Table.Head>
-                                <Table.Head>Documents</Table.Head>
-                                <Table.Head>Progress</Table.Head>
-                                <Table.Head>Submitted</Table.Head>
-                                <Table.Head>Actions</Table.Head>
-                            </Table.Row>
-                        </Table.Header>
-                        <Table.Body>
-                            {filteredQueue.map((item) => (
-                                <Table.Row key={item.id}>
-                                    <Table.Cell>
+                                </th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider min-w-[200px]">
+                                    User
+                                </th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider min-w-[140px]">
+                                    Status
+                                </th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider min-w-[100px]">
+                                    Priority
+                                </th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider min-w-[120px]">
+                                    Risk Score
+                                </th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider min-w-[150px]">
+                                    Documents
+                                </th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider min-w-[120px]">
+                                    Progress
+                                </th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider min-w-[120px]">
+                                    Submitted
+                                </th>
+                                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider min-w-[150px]">
+                                    Actions
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
+                            {filteredQueue.map((item, index) => (
+                                <tr
+                                    key={item.id}
+                                    className={`hover:bg-gray-50 dark:hover:bg-gray-800/50 ${index % 2 === 0 ? 'bg-white dark:bg-gray-900' : 'bg-gray-50/50 dark:bg-gray-800/20'}`}
+                                >
+                                    <td className="px-6 py-4 whitespace-nowrap">
                                         <input type="checkbox" className="rounded border-gray-300 text-primary-600 focus:ring-primary-500" />
-                                    </Table.Cell>
-                                    <Table.Cell>
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap">
                                         <div className="flex items-center">
                                             <div className="h-10 w-10 flex-shrink-0">
                                                 <div className="h-10 w-10 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center">
@@ -339,17 +358,17 @@ const KYCDashboard = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                    </Table.Cell>
-                                    <Table.Cell>
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap">
                                         {getStatusBadge(item.status)}
-                                    </Table.Cell>
-                                    <Table.Cell>
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap">
                                         {getPriorityBadge(item.priority)}
-                                    </Table.Cell>
-                                    <Table.Cell>
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap">
                                         {getRiskBadge(item.riskScore)}
-                                    </Table.Cell>
-                                    <Table.Cell>
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap">
                                         <div className="flex items-center space-x-1">
                                             {item.documentsSubmitted.map((doc, index) => (
                                                 <div
@@ -364,8 +383,8 @@ const KYCDashboard = () => {
                                                 {item.documentsSubmitted.length}/5
                                             </span>
                                         </div>
-                                    </Table.Cell>
-                                    <Table.Cell>
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap">
                                         <div className="flex items-center">
                                             <div className="w-16 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                                                 <div
@@ -377,17 +396,18 @@ const KYCDashboard = () => {
                                                 {item.completionPercentage}%
                                             </span>
                                         </div>
-                                    </Table.Cell>
-                                    <Table.Cell>
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap">
                                         <span className="text-sm text-gray-500 dark:text-gray-400">
                                             {formatTimeAgo(item.submittedAt)}
                                         </span>
-                                    </Table.Cell>
-                                    <Table.Cell>
-                                        <div className="flex items-center space-x-2">
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap">
+                                        <div className="flex items-center justify-center space-x-2">
                                             <Link
                                                 to={`/kyc/review/${item.id}`}
-                                                className="text-primary-600 hover:text-primary-500 dark:text-primary-400"
+                                                className="text-primary-600 hover:text-primary-500 dark:text-primary-400 p-1 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded transition-colors"
+                                                title="View Details"
                                             >
                                                 <EyeIcon className="h-4 w-4" />
                                             </Link>
@@ -395,11 +415,11 @@ const KYCDashboard = () => {
                                                 Review
                                             </Button>
                                         </div>
-                                    </Table.Cell>
-                                </Table.Row>
+                                    </td>
+                                </tr>
                             ))}
-                        </Table.Body>
-                    </Table>
+                        </tbody>
+                    </table>
                 </div>
 
                 {/* Pagination */}
